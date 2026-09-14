@@ -17,9 +17,9 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          gcc main.c core/*.c security/*.c system/*.c storage/*.c ui/*.c -o WindowsMaintenance.exe
+          gcc main.c core/*.c security/*.c system/*.c storage/*.c ui/*.c -o hihi.exe
 
       - name: Verify executable
         shell: bash
         run: |
-          test -f WindowsMaintenance.exe
+          test -f hihi.exe
