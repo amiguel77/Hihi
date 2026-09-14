@@ -1,23 +1,25 @@
-name: C/C++ CI
+name: C Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        shell: bash
+        run: |
+          gcc main.c core/*.c security/*.c system/*.c storage/*.c ui/*.c -o WindowsMaintenance.exe
+
+      - name: Verify executable
+        shell: bash
+        run: |
+          test -f WindowsMaintenance.exe
