@@ -10,13 +10,13 @@
 #include "../storage/allocation.h"
 
 typedef enum {
-    SESSION_UNINITIALIZED,
-    SESSION_CREATED,
-    SESSION_PREPARING,
-    SESSION_RUNNING,
-    SESSION_FINALIZING,
-    SESSION_ABORTED,
-    SESSION_COMPLETED
+    SESSION_UNINITIALIZED = 0,
+    SESSION_CREATED       = 1,
+    SESSION_PREPARING     = 2,
+    SESSION_RUNNING       = 3,
+    SESSION_FINALIZING    = 4,
+    SESSION_ABORTED       = 5,
+    SESSION_COMPLETED     = 6
 } SESSION_STATE;
 
 typedef struct {
