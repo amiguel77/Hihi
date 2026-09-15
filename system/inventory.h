@@ -8,7 +8,7 @@
 typedef struct {
     SYSTEM_COMPONENT components[MAX_COMPONENTS];
     size_t count;
-    unsigned long long total_size_mb;
+    unsigned long long total_size_kb;
     unsigned int total_dependencies;
 } SYSTEM_INVENTORY;
 
@@ -21,7 +21,7 @@ int inventory_add(
     const char *name,
     COMPONENT_TYPE type,
     COMPONENT_PRIORITY priority,
-    unsigned long long size_mb,
+    unsigned long long size_kb,
     unsigned int dependencies
 );
 
