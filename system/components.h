@@ -39,7 +39,7 @@ typedef struct {
     const char *name;
     COMPONENT_TYPE type;
     COMPONENT_PRIORITY priority;
-    unsigned long long size_mb;
+    unsigned long long size_kb;
     unsigned int dependencies;
     COMPONENT_STATE state;
 } SYSTEM_COMPONENT;
@@ -59,7 +59,7 @@ void component_initialize(
     const char *name,
     COMPONENT_TYPE type,
     COMPONENT_PRIORITY priority,
-    unsigned long long size_mb,
+    unsigned long long size_kb,
     unsigned int dependencies
 );
 
