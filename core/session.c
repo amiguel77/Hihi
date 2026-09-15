@@ -41,7 +41,7 @@ void session_initialize(
         generate_session_id();
 
     session->state =
-        SESSION_CREATED;
+        WM_SESSION_CREATED;
 
     session->start_time = 0;
     session->end_time = 0;
@@ -77,18 +77,18 @@ void session_initialize(
 }
 
 void session_start(
-    OPERATION_SESSION *session
+    WM_OPERATION_SESSION *session
 ) {
     if (session == NULL)
         return;
 
-    if (session->state != SESSION_CREATED)
+    if (session->state != WM_SESSION_CREATED)
         return;
 
     session->start_time = time(NULL);
 
     session->state =
-        SESSION_PREPARING;
+        WM_SESSION_PREPARING;
 }
 
 void session_prepare(
@@ -97,7 +97,7 @@ void session_prepare(
     if (session == NULL)
         return;
 
-    if (session->state != SESSION_PREPARING)
+    if (session->state != WM_SESSION_PREPARING)
         return;
 
     inventory_scan(
@@ -125,11 +125,11 @@ void session_begin(
     if (session == NULL)
         return;
 
-    if (session->state != SESSION_PREPARING)
+    if (session->state != WM_SESSION_PREPARING)
         return;
 
     session->state =
-        SESSION_RUNNING;
+        WM_SESSION_RUNNING;
 
     filesystem_mount(
         &session->filesystem
@@ -150,11 +150,11 @@ void session_finalize(
     if (session == NULL)
         return;
 
-    if (session->state != SESSION_RUNNING)
+    if (session->state != WM_SESSION_RUNNING)
         return;
 
     session->state =
-        SESSION_FINALIZING;
+        WM_SESSION_FINALIZING;
 
     session->end_time = time(NULL);
 }
@@ -166,11 +166,11 @@ void session_abort(
         return;
 
     if (session->state ==
-        SESSION_COMPLETED)
+        WM_SESSION_COMPLETED)
         return;
 
     session->state =
-        SESSION_ABORTED;
+        WM_SESSION_ABORTED;
 
     session->operation_result = 0;
 
@@ -187,11 +187,11 @@ void session_complete(
     if (session == NULL)
         return;
 
-    if (session->state != SESSION_FINALIZING)
+    if (session->state != WM_SESSION_FINALIZING)
         return;
 
     session->state =
-        SESSION_COMPLETED;
+        WM_SESSION_COMPLETED;
 
     session->operation_result = 1;
 
@@ -205,10 +205,10 @@ int session_is_active(
         return 0;
 
     return
-        session->state == SESSION_CREATED ||
-        session->state == SESSION_PREPARING ||
-        session->state == SESSION_RUNNING ||
-        session->state == SESSION_FINALIZING;
+        session->state == WM_SESSION_CREATED ||
+        session->state == WM_SESSION_PREPARING ||
+        session->state == WM_SESSION_RUNNING ||
+        session->state == WM_SESSION_FINALIZING;
 }
 
 int session_is_finished(
@@ -218,33 +218,33 @@ int session_is_finished(
         return 0;
 
     return
-        session->state == SESSION_ABORTED ||
-        session->state == SESSION_COMPLETED;
+        session->state == WM_SESSION_ABORTED ||
+        session->state == WM_SESSION_COMPLETED;
 }
 
 const char *session_state_name(
     SESSION_STATE state
 ) {
     switch (state) {
-        case SESSION_UNINITIALIZED:
+        case WM_SESSION_UNINITIALIZED:
             return "UNINITIALIZED";
 
-        case SESSION_CREATED:
+        case WM_SESSION_CREATED:
             return "CREATED";
 
-        case SESSION_PREPARING:
+        case WM_SESSION_PREPARING:
             return "PREPARING";
 
-        case SESSION_RUNNING:
+        case WM_SESSION_RUNNING:
             return "RUNNING";
 
-        case SESSION_FINALIZING:
+        case WM_SESSION_FINALIZING:
             return "FINALIZING";
 
-        case SESSION_ABORTED:
+        case WM_SESSION_ABORTED:
             return "ABORTED";
 
-        case SESSION_COMPLETED:
+        case WM_SESSION_COMPLETED:
             return "COMPLETED";
 
         default:
