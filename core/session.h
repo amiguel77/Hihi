@@ -37,8 +37,8 @@ typedef struct {
     unsigned int completed_components;
     unsigned int blocked_components;
 
-    uint64_t processed_mb;
-    uint64_t released_mb;
+    uint64_t processed_kb;
+    uint64_t released_kb;
 
     int authorization_result;
     int operation_result;
